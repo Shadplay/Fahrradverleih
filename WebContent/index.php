@@ -110,7 +110,6 @@ session_start();
        </script>
        
 	<div style ="text-align:center"> <b>How to find us: </b> </div>
-	
 	<div style='height: 500px; width: 100%;'>
 		<iframe width="" height="500"
 			src=https://maps.google.de/maps?hl=de&q=DHBW+Fahrradverleih%20%20Coblitzallee+1-9%20Mannheim&t=&z=14&ie=utf8&iwloc=b&output=embed

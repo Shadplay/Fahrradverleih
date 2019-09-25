@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <nav class="site-header sticky-top py-1">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2" href="#">
@@ -6,10 +9,15 @@
         <a class="py-2 d-none d-md-inline-block" href="#">DHBW</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Product</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-        <?php echo 'Hallo Welt' ?>
         <a class="py-2 d-none d-md-inline-block" href="">Support</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
-        <a href="login.php" class="btn-info py-2 d-none d-md-inline-block">Login/Registrierung</a>
-        
+		<?php
+		if (isset($_SESSION['username'])) {
+			echo '<a href="" class="btn-info py-2 d-none d-md-inline-block">'."Herzlich Willkommen: " .$_SESSION['username'].'</a>'; 
+		} 
+		else {
+		   echo '<a href="login.php" class="btn-info py-2 d-none d-md-inline-block">Login/Registrierung</a>';
+		}
+		?>
       </div>
  </nav>

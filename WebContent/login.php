@@ -31,7 +31,7 @@
 						$_SESSION['username'] = $data['username'];
 						$_SESSION['password'] = $data['password'];
 
-						header('Location: success.php');
+						header('Location: index.php');
 						exit;
 					}
 					else
