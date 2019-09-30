@@ -12,8 +12,8 @@ session_start();
         <a class="py-2 d-none d-md-inline-block" href="">Support</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
 		<?php
-		if (isset($_SESSION['username'])) {
-			echo '<a href="" class="btn-info py-2 d-none d-md-inline-block">'."Herzlich Willkommen: " .$_SESSION['username'].'</a>'; 
+		if (isset($_SESSION['email'])) {
+			echo '<a href="logout.php" class="btn-info py-2 d-none d-md-inline-block">'."Hallo " .$_SESSION['firstname'].", zum ausloggen hier klicken".'</a>';  
 		} 
 		else {
 		   echo '<a href="login.php" class="btn-info py-2 d-none d-md-inline-block">Login/Registrierung</a>';

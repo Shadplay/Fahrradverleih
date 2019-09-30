@@ -2982,6 +2982,15 @@
 	right: 0px;
 	bottom: 0px;
 }
+.effect1 {
+	position: absolute; 
+	bottom: 0; 
+	left: 0; 
+	width: 0; 
+	height: 2px; 
+	background-color: #4caf50; 
+	transition: 0.4s;}
+}
 
 
 

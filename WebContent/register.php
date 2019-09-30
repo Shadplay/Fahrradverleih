@@ -7,29 +7,29 @@
 		// Get data from FROM
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
-		$username = $_POST['username'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
 
 		if($firstname == '')
 			$errMsg = 'Enter your first name';
 		if($lastname == '')
 			$errMsg = 'Enter a last name';
-		if($username == '')
-			$errMsg = 'Enter username';
+		if($email == '')
+			$errMsg = 'Enter email';
 		if($password == '')
 			$errMsg = 'Enter password';
 		
 
 		if($errMsg == ''){
 			try {
-				$stmt = $connect->prepare('INSERT INTO pdo (firstname, lastname, username, password) VALUES (:firstname,:lastname, :username, :password)');
+				$stmt = $connect->prepare('INSERT INTO users (firstname, lastname, email, password) VALUES (:firstname,:lastname, :email, :password)');
 				$stmt->execute(array(
 					':firstname' => $firstname,
 					':lastname' => $lastname,
-					':username' => $username,
+					':email' => $email,
 					':password' => $password,
 					));
-				header('Location: register.php?action=joined');
+				header('Location: login.php');
 				exit;
 			}
 			catch(PDOException $e) {
@@ -42,32 +42,58 @@
 		$errMsg = 'Registration successfull. Now you can <a href="login.php">login</a>';
 	}
 ?>
-
-<html>
-<head><title>Register</title></head>
-	<style>
-	html, body {
-		margin: 1px;
-		border: 0;
-	}
-	</style>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="ressources/login/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="ressources/login/util.css">
+	<link rel="stylesheet" type="text/css" href="ressources/login/main.css">
+<!--===============================================================================================-->
+</head>
 <body>
-	<div align="center">
-		<div style=" border: solid 1px #006D9C; " align="left">
-			<?php
-				if(isset($errMsg)){
-					echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
-				}
-			?>
-			<div style="background-color:#006D9C; color:#FFFFFF; padding:10px;"><b>Register</b></div>
-			<div style="margin: 15px">
-				<form action="" method="post">
-					<input type="text" name="firstname" placeholder="Firstname" value="<?php if(isset($_POST['firstname'])) echo $_POST['firstname'] ?>" autocomplete="off" class="box"/><br /><br />
-					<input type="text" name="lastname" placeholder="Lastname" value="<?php if(isset($_POST['firstname'])) echo $_POST['lastname'] ?>" autocomplete="off" class="box"/><br /><br />
-					<input type="text" name="username" placeholder="Username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" autocomplete="off" class="box"/><br /><br />
-					<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" class="box" /><br/><br />
-					<input type="submit" name='register' value="Register" class='submit'/><br />
-				</form>
+		
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('ressources/login/images/image.jpg');">
+			<div class="wrap-login100">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Registration
+					</span>
+					<form action="" method="post">
+					<div class="wrap-input100 validate-input" data-validate = "Enter Firstname">
+						<input class="input100" input type="text" name="firstname" placeholder="Bitte geben sie ihren Vornamen an" value="<?php if(isset($_POST['firstname'])) echo $_POST['firstname'] ?>" autocomplete="off" />
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter Lastname">
+						<input class="input100" type="text" name="lastname" placeholder="Bitte geben sie ihren Nachnamen an" value="<?php if(isset($_POST['firstname'])) echo $_POST['lastname'] ?>" autocomplete="off" />
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter E-Mail">
+						<input class="input100" type="text" name="email" placeholder="Wie lautet ihre E-Mail Adresse?" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" />
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input input type="password" name="password" placeholder="Geben sie das gewünschte Passwort ein" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" class="input100" />
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+
+					<div class="container-login100-form-btn">
+						<input type="submit" name='register' value="Registrieren sie sich jetzt" class='submit' style="width:300px; height: 40px;  background-color :#ffffff"/>
+					</div>
+					</form>
 			</div>
 		</div>
 	</div>

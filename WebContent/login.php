@@ -5,30 +5,30 @@
 		$errMsg = '';
 
 		// Get data from FORM
-		$username = $_POST['username'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		if($username == '')
-			$errMsg = 'Enter username';
+		if($email == '')
+			$errMsg = 'Enter email';
 		if($password == '')
 			$errMsg = 'Enter password';
 
 		if($errMsg == '') {
 			try {
-				$stmt = $connect->prepare('SELECT id, firstname, lastname, username, password FROM pdo WHERE username = :username');
+				$stmt = $connect->prepare('SELECT id, firstname, lastname, email, password FROM users WHERE email = :email');
 				$stmt->execute(array(
-					':username' => $username
+					':email' => $email
 					));
 				$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 				if($data == false){
-					$errMsg = "User $username not found.";
+					$errMsg = "User $email not found.";
 				}
 				else {
 					if($password == $data['password']) {
 						$_SESSION['firstname'] = $data['firstname'];
 						$_SESSION['lastname'] = $data['lastname'];
-						$_SESSION['username'] = $data['username'];
+						$_SESSION['email'] = $data['email'];
 						$_SESSION['password'] = $data['password'];
 
 						header('Location: index.php');
@@ -44,30 +44,53 @@
 		}
 	}
 ?>
-
-<html>
-<head><title>Login</title></head>
-	<style>
-	html, body {
-		margin: 1px;
-		border: 0;
-	}
-	</style>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="ressources/login/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="ressources/login/util.css">
+	<link rel="stylesheet" type="text/css" href="ressources/login/main.css">
+<!--===============================================================================================-->
+</head>
 <body>
-	<div align="center">
-		<div style=" border: solid 1px #006D9C; " align="left">
-			<?php
-				if(isset($errMsg)){
-					echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
-				}
-			?>
-			<div style="background-color:#006D9C; color:#FFFFFF; padding:10px;"><b>Login</b></div>
-			<div style="margin: 15px">
-				<form action="" method="post">
-					<input type="text" name="username" placeholder="Username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" autocomplete="off" class="box"/><br /><br />
-					<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" class="box" /><br/><br />
-					<input type="submit" name='login' value="Login" class='submit'/><br />
-				</form>
+		
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('ressources/login/images/image.jpg');">
+			<div class="wrap-login100">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+					<form action="" method="post">
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" name="email" placeholder="E-Mail" autocomplete="off" />
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" class="input100" />
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+
+					<div class="container-login100-form-btn">
+						<input type="submit" name='login' value="Login" class='submit' style="width:300px; height: 40px;  background-color :#ffffff"/>
+					</div>
+					</form>
+					<div class="text-center p-t-90">
+						<a class="txt1" href="register.php">
+							Möchten sie sich Registrieren? Hier klicken!
+						</a>
+					</div>
 			</div>
 		</div>
 	</div>

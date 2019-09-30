@@ -5,7 +5,7 @@ session_start();
 define('dbhost', 'localhost');
 define('dbuser', 'root');
 define('dbpass', '');
-define('dbname', 'test');
+define('dbname', 'fahrrad');
 
 // Connecting database
 try {
