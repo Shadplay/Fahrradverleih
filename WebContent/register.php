@@ -62,7 +62,7 @@
 		<div class="container-login100" style="background-image: url('ressources/login/images/image.jpg');">
 			<div class="wrap-login100">
 					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
+						 <img width="90" src="ressources/vectorgrafik.svg">
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
