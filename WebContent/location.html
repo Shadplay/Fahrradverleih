@@ -1,0 +1,46 @@
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico">
+	
+    <title>Fahrradverleih Mannheim</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
+
+    <!-- Custom styles for this template -->
+    <link href="ressources/product.css" rel="stylesheet">
+	
+  </head>
+
+ <body>
+
+		<!--Navigation bar-->
+	<div id="nav-placeholder">
+
+	</div>
+
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script>
+	$.get("navigation.php", function(data){
+		$("#nav-placeholder").replaceWith(data);
+	});
+	</script>
+	<!--end of Navigation bar-->
+	<div style ="text-align:center"> <h1>Hier befinden wir uns: </h1> </div>
+		<div style='height: 500px; width: 100%;'>
+			<iframe width="" height="500"
+				src=https://maps.google.de/maps?hl=de&q=DHBW+Fahrradverleih%20%20Coblitzallee+1-9%20Mannheim&t=&z=14&ie=utf8&iwloc=b&output=embed
+				frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+				style='height: 500px; width: 100%;'></iframe>
+			<p
+				style="text-align: right; margin: 0px; padding-top: -10px; line-height: 10px; font-size: 10px; margin-top: -25px;">
+				<a href="http://www.checkpoll.de/google-maps-generator/"
+					style="font-size: 10px;" target="_blank">Google Maps Generator</a>
+				by <a href="https://www.on-projects.de/" style="font-size: 10px;"
+					title="" target="_blank">on-projects</a>
+			</p>
+		</div>
+	</diV>
+</body>
+</html>

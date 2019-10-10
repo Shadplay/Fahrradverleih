@@ -4,12 +4,12 @@ session_start();
 <nav class="site-header sticky-top py-1">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2 d-none d-md-inline-block" href="#">
-         <img width="30" src="ressources/vectorgrafik.svg" style="filter: invert(100%);">
+         <a href=index.php><img width="30" src="ressources/vectorgrafik.svg" style="filter: invert(100%);"></a>
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">DHBW</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Product</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-        <a class="py-2 d-none d-md-inline-block" href="">Support</a>
+        <a class="py-2 d-none d-md-inline-block" href="https://www.mannheim.dhbw.de/startseite">DHBW</a>
+        <a class="py-2 d-none d-md-inline-block" href="location.html">Wie sie uns finden</a>
+        <a class="py-2 d-none d-md-inline-block" href="contact.html">Kontakt</a>
+        <a class="py-2 d-none d-md-inline-block" href="price.php">Preise</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
 		<?php
 		if (isset($_SESSION['email'])) {

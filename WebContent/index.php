@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="utf-8">
     <link rel="icon" href="favicon.ico">
@@ -109,20 +109,6 @@ session_start();
        }
        </script>
        
-	<div style ="text-align:center"> <b>How to find us: </b> </div>
-	<div style='height: 500px; width: 100%;'>
-		<iframe width="" height="500"
-			src=https://maps.google.de/maps?hl=de&q=DHBW+Fahrradverleih%20%20Coblitzallee+1-9%20Mannheim&t=&z=14&ie=utf8&iwloc=b&output=embed
-			frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-			style='height: 500px; width: 100%;'></iframe>
-		<p
-			style="text-align: right; margin: 0px; padding-top: -10px; line-height: 10px; font-size: 10px; margin-top: -25px;">
-			<a href="http://www.checkpoll.de/google-maps-generator/"
-				style="font-size: 10px;" target="_blank">Google Maps Generator</a>
-			by <a href="https://www.on-projects.de/" style="font-size: 10px;"
-				title="" target="_blank">on-projects</a>
-		</p>
-	</div>
 	
 	<div class="col-md-5 p-lg-5 mx-auto my-5" style= text-align:left>
 	<h3>Kontakt</h3>
