@@ -8,7 +8,7 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 
 		if($firstname == '')
 			$errMsg = 'Enter your first name';
@@ -29,8 +29,13 @@
 					':email' => $email,
 					':password' => $password,
 					));
-				header('Location: login.php');
-				exit;
+					?>
+						<script>
+						alert('Registrierung erfolgreich, bitte loggen sie sich nun ein');
+						window.location = "index.php";	
+						</script>
+					<?php
+				
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();
@@ -44,7 +49,7 @@
 ?>
 <html lang="en">
 <head>
-	<title>Login V3</title>
+	<title>Fahrradverleih Mannheim Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -55,6 +60,37 @@
 	<link rel="stylesheet" type="text/css" href="ressources/login/util.css">
 	<link rel="stylesheet" type="text/css" href="ressources/login/main.css">
 <!--===============================================================================================-->
+
+<script>
+function testekennwortqualitaet(inhalt)
+{
+ if (inhalt=="")
+ {
+  document.getElementById("sicherheitshinweis").innerHTML="keine Eingabe";
+  return;
+ }
+ if (window.XMLHttpRequest)
+ {
+  // AJAX nutzen mit IE7+, Chrome, Firefox, Safari, Opera
+  xmlhttp=new XMLHttpRequest();
+ }
+ else
+ {
+  // AJAX mit IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.onreadystatechange=function()
+ {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  {
+   document.getElementById("sicherheitshinweis").innerHTML=xmlhttp.responseText;
+  }
+ }
+ xmlhttp.open("GET","kennworttesten.php?q="+inhalt,true);
+ xmlhttp.send();
+}
+</script>
+
 </head>
 <body>
 		
@@ -85,8 +121,10 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input input type="password" name="password" placeholder="Geben sie das gewünschte Passwort ein" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" class="input100" />
+						<input input type="password" name="password" placeholder="Geben sie das gewünschte Passwort ein" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" class="input100" onkeyup="testekennwortqualitaet(this.value)" />	
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<span id="sicherheitshinweis"></span>
+						
 					</div>
 
 

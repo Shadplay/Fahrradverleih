@@ -6,7 +6,9 @@
 
 		// Get data from FORM
 		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
+		$remember = isset($_POST['login_remember']) ? '1' : '0';
+		
 
 		if($email == '')
 			$errMsg = 'Enter email';
@@ -20,9 +22,13 @@
 					':email' => $email
 					));
 				$data = $stmt->fetch(PDO::FETCH_ASSOC);
-
 				if($data == false){
 					$errMsg = "User $email not found.";
+					?>
+						<script>
+						alert("Die von Ihnen eingegebene Email ist falsch");
+						</script>
+					<?php
 				}
 				else {
 					if($password == $data['password']) {
@@ -30,12 +36,20 @@
 						$_SESSION['lastname'] = $data['lastname'];
 						$_SESSION['email'] = $data['email'];
 						$_SESSION['password'] = $data['password'];
-
+						
+						setcookie("email",$email,time()+(3600*24));
+						
 						header('Location: index.php');
 						exit;
 					}
-					else
+					else {
 						$errMsg = 'Password not match.';
+						?>
+						<script>
+						alert("Das von Ihnen eingegebene Passwort ist falsch");
+						</script>
+						<?php
+					}
 				}
 			}
 			catch(PDOException $e) {
@@ -46,7 +60,7 @@
 ?>
 <html lang="en">
 <head>
-	<title>Login V3</title>
+	<title>Fahrradverleih Mannheim Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
