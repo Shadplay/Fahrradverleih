@@ -86,7 +86,7 @@
 					</span>
 					<form action="" method="post">
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" name="email" placeholder="E-Mail" autocomplete="off" />
+						<input class="input100" type="text" value="<?php include ('auslesenCookie.php'); ?>" name="email" placeholder="E-Mail" autocomplete="off" />
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 

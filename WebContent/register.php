@@ -66,7 +66,7 @@ function testekennwortqualitaet(inhalt)
 {
  if (inhalt=="")
  {
-  document.getElementById("sicherheitshinweis").innerHTML="keine Eingabe";
+  document.getElementById("sicherheitshinweis").innerHTML="Keine Eingabe";
   return;
  }
  if (window.XMLHttpRequest)
