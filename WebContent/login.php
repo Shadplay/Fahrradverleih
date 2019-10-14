@@ -9,6 +9,10 @@
 		$password = crypt($_POST['password'],$email);
 		$remember = isset($_POST['login_remember']) ? '1' : '0';
 		
+		if(isset($_COOKIE['PHPSESSID'])) {
+			$session_id= $_COOKIE['PHPSESSID'];
+		}
+		
 
 		if($email == '')
 			$errMsg = 'Enter email';
@@ -36,6 +40,12 @@
 						$_SESSION['lastname'] = $data['lastname'];
 						$_SESSION['email'] = $data['email'];
 						$_SESSION['password'] = $data['password'];
+						
+						$stmt = $connect->prepare('UPDATE users SET session_id = (:session_id) WHERE email = :email');
+						$stmt->execute(array(
+						':session_id' => $session_id,
+						':email' => $email,
+						));
 						
 						setcookie("email",$email,time()+(3600*24));
 						

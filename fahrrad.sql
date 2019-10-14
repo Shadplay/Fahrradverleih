@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 14. Okt 2019 um 12:53
+-- Erstellungszeit: 14. Okt 2019 um 14:59
 -- Server-Version: 10.4.6-MariaDB
 -- PHP-Version: 7.3.9
 
@@ -108,44 +108,21 @@ CREATE TABLE `users` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `telefon` bigint(20) NOT NULL,
-  `strasse` varchar(40) NOT NULL,
-  `hausnr` varchar(10) NOT NULL,
-  `plz` varchar(10) NOT NULL,
-  `ort` varchar(40) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `session_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `telefon`, `strasse`, `hausnr`, `plz`, `ort`) VALUES
-(1, 'Maximilian', 'Geis', 'm.geis@mail.com', '123456', 0, '', '', '', ''),
-(2, 'Patrick', 'Odermann', 'patrick@test.com', '123456', 0, '', '', '', ''),
-(3, 'Fabian', 'Rohrmann', 'f.rohrmann@mail.com', '123456', 0, '', '', '', '');
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `session_id`) VALUES
+(8, 'Patrick', 'Odermann', 'patrick.odermann@mail.com', 'pa4.HHSXL55NA', '97i3fn3pdtren9kobt7b1hjp74'),
+(9, 'Fabian', 'Rohrmann', 'fabian.rohrmann@mail.com', 'faXiVPE7xyD2E', 'rhq1jmr8c5ierf8q2q5evd7qtc');
 
 --
 -- Indizes der exportierten Tabellen
 --
-
---
--- Indizes für die Tabelle `bikes`
---
-ALTER TABLE `bikes`
-  ADD PRIMARY KEY (`bikeID`);
-
---
--- Indizes für die Tabelle `loan`
---
-ALTER TABLE `loan`
-  ADD PRIMARY KEY (`leihID`);
-
---
--- Indizes für die Tabelle `type`
---
-ALTER TABLE `type`
-  ADD PRIMARY KEY (`modellID`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -158,28 +135,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT für Tabelle `bikes`
---
-ALTER TABLE `bikes`
-  MODIFY `bikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT für Tabelle `loan`
---
-ALTER TABLE `loan`
-  MODIFY `leihID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT für Tabelle `type`
---
-ALTER TABLE `type`
-  MODIFY `modellID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
