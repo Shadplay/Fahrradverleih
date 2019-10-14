@@ -10,9 +10,9 @@ session_start();
         <a class="py-2 d-none d-md-inline-block" href="location.html">Wie sie uns finden</a>
         <a class="py-2 d-none d-md-inline-block" href="contact.html">Kontakt</a>
         <a class="py-2 d-none d-md-inline-block" href="price.php">Preise</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
+        <a class="py-2 d-none d-md-inline-block" href="verfügbarkeit.php">Verfügbarkeitsstatus</a>
 		<?php
-		if (isset($_SESSION['email'])) {
+		if(isset($_SESSION['email'])) {
 			echo '<a href="logout.php" class="btn-info py-2 d-none d-md-inline-block">'."Hallo " .$_SESSION['firstname'].", zum ausloggen hier klicken".'</a>';  
 		} 
 		else {
