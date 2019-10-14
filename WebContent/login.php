@@ -6,7 +6,7 @@
 
 		// Get data from FORM
 		$email = $_POST['email'];
-		$password = md5($_POST['password']);
+		$password = crypt($_POST['password'],$email);
 		$remember = isset($_POST['login_remember']) ? '1' : '0';
 		
 

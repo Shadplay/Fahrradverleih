@@ -8,7 +8,7 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
-		$password = md5($_POST['password']);
+		$password = crypt($_POST['password'],$email);
 
 		if($firstname == '')
 			$errMsg = 'Enter your first name';
