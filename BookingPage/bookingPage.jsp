@@ -64,10 +64,6 @@ function clickCounter() {
 <form action="booker" method= "post">
 <center>
 <table>
-	<tr><td><label for="email" required style="color:white"/>E-Mail-Adresse:</label></td>
-		<td><input type="text" id="email"name="email" placeholder="max.mustermann@bsp.com"></td>
-	</tr>
-	
 	<tr><td><label for="type" required style="color:white">Fahrradtyp:</label> </td>
 		<td><select id="type" name="type">
 				<option value="1"> Mountainbike </option>

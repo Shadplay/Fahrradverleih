@@ -15,7 +15,7 @@ public class BookingMethods {
 	static java.sql.Connection con;
 	static java.sql.PreparedStatement ps;
 	
-	public int insertBooking (Booking b, String mail) throws Exception {
+	public int insertBooking (Booking b) throws Exception {
 		int status=0;
 		
 		try {
@@ -25,18 +25,18 @@ public class BookingMethods {
 //			String pattern = "yyyy-MM-dd";
 //			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);			
 
-			ps=con.prepareStatement("SELECT id FROM users WHERE email = ?;");
+			/**ps=con.prepareStatement("SELECT id FROM users WHERE email = ?;");
 			ps.setString(1, mail);
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()) {
 				mail = rs.getString(1);	//Mail ist hier die userID (im vorherigen Schritt gesetzt)			
-			}
+			}**/
 			
 			ps=con.prepareStatement("Insert into loan values(?,?,?,?,?,?)");
 			ps.setString(1, null);
 //			ps.setString(2, b.getKundenID());//	KundenID aus Session abfragen	
-			ps.setString(2, mail); //Mail ist hier die userID (im vorherigen Schritt gesetzt)
+			ps.setString(2, b.getKundenID()/**mail**/); //Mail ist hier die userID (im vorherigen Schritt gesetzt)
 			ps.setString(3, b.getRadID()); //in Booker schon auf eine nicht gebuchte ID gesetzt
 			ps.setDate(4, b.getLeihDat());
 			ps.setDate(5, b.getRueckDat());
@@ -57,15 +57,42 @@ public class BookingMethods {
 	
 	
 	
-	public String getUserID(String email) throws Exception{
+	//greift aus der sessionID auf die UserID zu und gibt diese dann zurück
+	public String getUserID( HttpServletRequest request) throws Exception{
 		String ret="";
 		
+		//cookies
+		Cookie cookie = null;
+        Cookie[] cookies = null;
+       
+        // Get an array of Cookies associated with the this domain
+        cookies = request.getCookies();
+		
+        for(int i=0; i<cookies.length;i++) {
+        	if(cookies[i].getName().equals("PHPSESSID")){
+        		ret = cookies[i].getValue();
+        		break;
+        	}
+        }
+        
+        /**if( cookies != null ) {
+        	for(int i=0;i<cookies.length;i++) {
+        		System.out.println(i);
+        		System.out.println("Name: " + cookies[i].getName());
+				System.out.println("Value: " + cookies[i].getValue());
+				System.out.println("Domain: " + cookies[i].getDomain());				
+        	}
+		 } else {
+			 System.out.println("Fail");
+		 }
+        **/
 		try {
 			con = MyConnection.getCon();
-			ps=con.prepareStatement("SELECT id FROM users WHERE email=?");
-			ps.setString(1, email);
-				
+			ps=con.prepareStatement("SELECT id FROM users WHERE session_id=?");
+			ps.setString(1, ret);
+				System.out.println(ret);
 			ResultSet rs = ps.executeQuery();
+				System.out.println(ret);
 			while(rs.next()) {
 				ret = rs.getString(1);
 			}
@@ -106,9 +133,8 @@ public class BookingMethods {
 	
 	//SessionID-Cookie
 	public boolean isSessionID(HttpServletRequest request, String mail) throws Exception{
-		boolean ret = false;
-		try {
-			 //cookies
+		boolean ret = false;		
+			//cookies
 			Cookie cookie = null;
 	        Cookie[] cookies = null;
 	       
@@ -125,11 +151,12 @@ public class BookingMethods {
 			 } else {
 				 System.out.println("Fail");
 			 }
-	      /**  for(int i=0; i<cookies.length;i++) {
+	        /**
+	        for(int i=0; i<cookies.length;i++) {
 	        	if(cookies[i].getName().equals("PHPSESSID")){
 	        		try {
 	        			con = MyConnection.getCon();
-        				ps=con.prepareStatement("SELECT email FROM users WHERE session_id=? GROUP BY session_id");
+        				ps=con.prepareStatement("SELECT email FROM users WHERE session_id=?");
         				ps.setString(1, cookies[i].getValue());
         				ResultSet rs = ps.executeQuery();
         				while(rs.next()) {
@@ -140,15 +167,12 @@ public class BookingMethods {
         				}
 	        		} catch(Exception e){
 	    			System.out.println(e);
-	        		} finally {
+	        		} finally {	        			
 	        			con.close();
 	    			}
-
 	        	}
-	        }**/
-		}finally {
-			return ret;
-		}
+	        }		**/
+	        return ret;
 	}
 	//Ende Cookies
 			

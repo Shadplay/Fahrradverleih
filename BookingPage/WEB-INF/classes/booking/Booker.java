@@ -34,7 +34,6 @@ public class Booker extends HttpServlet {
 		System.out.println("ich bin beim Booker");		 
 		
 			try {
-				String email = request.getParameter("email"); //Programmieren des Sessionzugriffs
 				String radID = request.getParameter("type");
 				Date leihDat = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ldate"));
 //				java.sql.Date leihDat = request.getParameter("ldate"); 
@@ -45,15 +44,16 @@ public class Booker extends HttpServlet {
 				Booking b= new Booking();
 				BookingMethods bm = new BookingMethods();
 
-					b.setKundenID(bm.getUserID(email));
+					b.setKundenID(bm.getUserID(request));
+					System.out.println(b.getKundenID());
 					b.setRadID(bm.getRadID(new java.sql.Date(leihDat.getTime()), radID)); //radID wird auf eine ID von einem nicht gebuchten Rad gesetzt
 					b.setLeihDat(new java.sql.Date(leihDat.getTime()));
 					b.setRueckDat(new java.sql.Date(rueckDat.getTime()));
 					b.setRueckstatus(rueckStatus);		
 					
 				//KundenID ist email (wurde vorher so gesetzt)
-				int i = bm.insertBooking(b, /**b.getKundenID()**/email); // mir nicht klar, was für ein Cookie das ist cookies[0].getValue()
-				bm.isSessionID(request, email);
+				int i = bm.insertBooking(b); // mir nicht klar, was für ein Cookie das ist cookies[0].getValue()
+				//bm.isSessionID(request, email);
 				
 				if(b.getRueckDat()!=null && b.getLeihDat()!=null){
 					request.setAttribute("message","Das Fahrrad " + b.getRadID() + " wurde für folgendes Datum gebucht: <br>" + leihDat +" <b>bis</b> <br>" + rueckDat);
@@ -61,6 +61,7 @@ public class Booker extends HttpServlet {
 					request.setAttribute("message","Stellen Sie sicher, dass Sie ein Ausleih- und Rueckgabedatum angegeben haben");
 				}
 				System.out.println("Insert");
+				
 				// Status wurde bei java.sql.SQLException auf "-2" gesetzt
 				if(i==-2) {
 					request.setAttribute("message","Für das gewählte Datum ist leider kein Fahrrad des gewählten Typs mehr verfügbar.<br> Bitte entscheiden Sie sich für ein anderes Fahrrad, oder wählen Sie ein anderes Datum.<br> Vielen Dank!");
