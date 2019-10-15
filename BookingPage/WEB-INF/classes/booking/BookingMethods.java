@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -12,64 +15,143 @@ public class BookingMethods {
 	static java.sql.Connection con;
 	static java.sql.PreparedStatement ps;
 	
-	public int insertBooking (Booking b) throws Exception {
+	public int insertBooking (Booking b, String mail) throws Exception {
 		int status=0;
 		
 		try {
+         
 			con = MyConnection.getCon();
-			java.sql.Date d =b.getLeihDat();
-			String pattern = "yyyy-MM-dd";
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-					
+//			java.sql.Date d =b.getLeihDat();
+//			String pattern = "yyyy-MM-dd";
+//			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);			
+
+			ps=con.prepareStatement("SELECT id FROM users WHERE email = ?;");
+			ps.setString(1, mail);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				mail = rs.getString(1);	//Mail ist hier die userID (im vorherigen Schritt gesetzt)			
+			}
+			
 			ps=con.prepareStatement("Insert into loan values(?,?,?,?,?,?)");
 			ps.setString(1, null);
-			ps.setString(2, b.getKundenID());//	KundenID aus Session abfragen		
-			ps.setString(3, b.getRadID()); //SQL-Abfrage für richtigen Radtyp
-//			ps.setString(4, b.getLeihDat());
-//			ps.setString(5, b.getRueckDat());
-//früher1	ps.setDate(4, (java.sql.Date) simpleDateFormat.parse(b.getLeihDat()));//SQL-Abfrage ob Rad Verfügbar		"DATE_FORMAT ("	+	+ ", ?%d.%m.%Y?);"
-//früer 2	ps.setDate(4, new java.sql.Date(b.getLeihDat().getTime()));//SQL-Abfrage ob Rad Verfügbar		"DATE_FORMAT ("	+	+ ", ?%d.%m.%Y?);"
-			ps.setDate(4, b.getLeihDat());//SQL-Abfrage ob Rad Verfügbar		"DATE_FORMAT ("	+	+ ", ?%d.%m.%Y?);"
-			ps.setDate(5, b.getRueckDat());//SQL-Abfrage ob Rad Verfügbar		ps.setString(5, b.getRueckDat());
+//			ps.setString(2, b.getKundenID());//	KundenID aus Session abfragen	
+			ps.setString(2, mail); //Mail ist hier die userID (im vorherigen Schritt gesetzt)
+			ps.setString(3, b.getRadID()); //in Booker schon auf eine nicht gebuchte ID gesetzt
+			ps.setDate(4, b.getLeihDat());
+			ps.setDate(5, b.getRueckDat());
 			ps.setString(6, b.getRueckstatus()); 
 			status=ps.executeUpdate();
-			con.close();
-
+			
+		// Fehlermeldung mit Statuscode -2 wird ausgegeben
+		}catch (java.sql.SQLException e) {				
+			status=-2;
+			System.out.println(e.toString());
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println(e.toString());
 		}finally {
 			con.close();
 		}
 		return status;
 	}
 	
-	//gibt FahrradIDs in der gewünschten Anzahl aus, die für den Tag nicht gebucht sind
-	public String[] getFahrraeder(Date leihDat, int modellID, int anzahl) throws Exception {
-		Booking b = new Booking();
-		String[] ret= new String[anzahl];
+	
+	
+	public String getUserID(String email) throws Exception{
+		String ret="";
 		
 		try {
 			con = MyConnection.getCon();
-			ps=con.prepareStatement("SELECT radID FROM (SELECT * FROM bike LEFT JOIN loan ON bike.modellID=loan.modellID  WHERE leihDat=? AND modellID=?) WHERE radID IS NULL");
-			ps.setString(1, "" + leihDat);
-			ps.setString(2, "" + modellID);
+			ps=con.prepareStatement("SELECT id FROM users WHERE email=?");
+			ps.setString(1, email);
+				
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ret = rs.getString(1);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+			ret = "-1";
+		}finally {
+			con.close();
+		}
+		return ret;
+		}
+	
+	
+	//gibt FahrradIDs in der gewünschten kategorie aus, das für den Tag nicht gebucht ist
+	public String getRadID(java.sql.Date leihDat, String modellID) throws Exception {
+		Booking b = new Booking();
+		String ret= "";
+		
+		try {
+			con = MyConnection.getCon();
+			ps=con.prepareStatement("SELECT bikeID FROM	bikes LEFT JOIN ((SELECT radID AS r FROM loan WHERE leihDat = ? GROUP BY r) AS datum) ON bikes.bikeID = datum.r JOIN type ON type.modellID=bikes.modellID WHERE datum.r IS NULL AND bikes.modellID=? GROUP BY bikeID");
+			ps.setDate(1, leihDat);//(1, leihDat +"");
+			ps.setString(2, modellID);
 		
 			ResultSet rs = ps.executeQuery();
-			int i = 0;
-			while(rs.next()) {
-				if(i<anzahl) {
-					ret[i]=rs.getString(1);
-				}
-				i++;
-			}
+			rs.next();
+			ret=rs.getString(1);
+			
 		} catch(Exception e) {
 			System.out.println(e);
 		}finally {
 			con.close();
 		}
+		System.out.println(ret);
 		return ret;
 		
 	}
+	
+	//SessionID-Cookie
+	public boolean isSessionID(HttpServletRequest request, String mail) throws Exception{
+		boolean ret = false;
+		try {
+			 //cookies
+			Cookie cookie = null;
+	        Cookie[] cookies = null;
+	       
+	        // Get an array of Cookies associated with the this domain
+	        cookies = request.getCookies();
+			
+	        if( cookies != null ) {
+	        	for(int i=0;i<cookies.length;i++) {
+	        		System.out.println(i);
+	        		System.out.println("Name: " + cookies[i].getName());
+					System.out.println("Value: " + cookies[i].getValue());
+					System.out.println("Domain: " + cookies[i].getDomain());				
+	        	}
+			 } else {
+				 System.out.println("Fail");
+			 }
+	      /**  for(int i=0; i<cookies.length;i++) {
+	        	if(cookies[i].getName().equals("PHPSESSID")){
+	        		try {
+	        			con = MyConnection.getCon();
+        				ps=con.prepareStatement("SELECT email FROM users WHERE session_id=? GROUP BY session_id");
+        				ps.setString(1, cookies[i].getValue());
+        				ResultSet rs = ps.executeQuery();
+        				while(rs.next()) {
+        					if(rs.getString(1).equals(mail)) {
+        						ret = true;
+        						break;
+        					}
+        				}
+	        		} catch(Exception e){
+	    			System.out.println(e);
+	        		} finally {
+	        			con.close();
+	    			}
+
+	        	}
+	        }**/
+		}finally {
+			return ret;
+		}
+	}
+	//Ende Cookies
+			
 	
 	/**
 	public Booking getBooking(int leihID) {
@@ -100,3 +182,17 @@ public class BookingMethods {
 	}
 	**/
 }
+
+/**SELECT radID 
+FROM
+	bikes 
+	JOIN loan ON bikes.bikeID=loan.radID
+    LEFT JOIN 
+	((SELECT radID AS r 
+     FROM loan 
+     WHERE leihDat = '2019-11-30'
+     GROUP BY r) AS datum) 
+     ON datum.r = loan.radID 
+WHERE datum.r IS NULL AND modellID=2
+GROUP BY radID
+**/

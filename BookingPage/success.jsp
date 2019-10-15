@@ -8,7 +8,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div>${message}</div>
-<div>${email}</div>
+<center>
+<br><br>
+
+<script>
+function clickCounter() {
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.clickcount) {
+      localStorage.clickcount = Number(localStorage.clickcount)+1;
+    } else {
+      localStorage.clickcount = 1;
+    }
+    document.getElementById("result").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank you!";
+  } else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+  }
+}
+</script>
+	<div style="color:black" id="result"><br><br></div>
+	
+<div><${message}</div>
+
+</center>
 </body>
 </html>

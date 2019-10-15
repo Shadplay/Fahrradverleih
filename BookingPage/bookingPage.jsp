@@ -7,36 +7,68 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Booking page</title>
-    <!-- Bootstrap core CSS -->
-    <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
 
+	<link href="/bookingPage.css" rel="stylesheet"> 
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet"> 
     <!-- Custom styles for this template -->
     <link href="ressources/product.css" rel="stylesheet">
+    
+    <style>
+		body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;}
+		.bookingPage label {font-family:Georgia, Times, "Times New Roman", serif;}
+		.background {
+			  background-image: url(background2.jpg);	
+			  background-size: 100% 100%;
+			  position: relative!important;
+			  overflow: hidden;
+			  padding: 4rem!important; 
+		}
+		.background-font {
+				font-size: 3.5rem;
+				font-weight: 300;
+				line-height: 1.2;
+				font-weight: 400!important;
+				opacity: 1.0 !important;
+		}
+	</style>
 </head>
-
 <body>
 
-<!--Navigation bar-->
+<div class="background bg-light">
 
-	<div id="nav-placeholder">
-
-	</div>
-
-	<script src="//code.jquery.com/jquery.min.js"></script>
-	<script>
-	$.get("\..\..\navigation.php", function(data){
-		$("#nav-placeholder").replaceWith(data);
-	});
-	</script>
-	<!--end of Navigation bar-->
+<center>
+<canvas id="dynamicGraphic" class="text1" width="250" height="100"></canvas>
+              <script>
+              var c = document.getElementById("dynamicGraphic");
+              var ctx = c.getContext("2d");
+              ctx.font = "30px Arial";
+              ctx.strokeText("Fahrradbuchung",10,50);
+              </script>
+<script>
+function clickCounter() {
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.clickcount) {
+      localStorage.clickcount = Number(localStorage.clickcount)+1;
+    } else {
+      localStorage.clickcount = 1;
+    }
+    document.getElementById("msg").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank You!";
+  } else {
+    document.getElementById("msg").innerHTML = "Sorry, your browser does not support web storage...";
+  }
+}
+</script>
+<div id="msg"></div>
 
 <form action="booker" method= "post">
+<center>
 <table>
-	<tr><td><label for="email" required/>E-Mail-Adresse:</label></td>
+	<tr><td><label for="email" required style="color:white"/>E-Mail-Adresse:</label></td>
 		<td><input type="text" id="email"name="email" placeholder="max.mustermann@bsp.com"></td>
 	</tr>
 	
-	<tr><td><label for="type" required>Fahrradtyp:</label> </td>
+	<tr><td><label for="type" required style="color:white">Fahrradtyp:</label> </td>
 		<td><select id="type" name="type">
 				<option value="1"> Mountainbike </option>
 				<option value="2"> Strassenrad </option>
@@ -45,7 +77,7 @@
 		</td>
 	</tr>
 	
-	<tr><td><label for="amount" required>Anzahl:</label></td>
+	<tr><td><label for="amount" required style="color:white">Anzahl:</label></td>
 		<td>
 			<select id="amount" name="anzahl">
 				<option value="1"> 1 </option>
@@ -57,24 +89,27 @@
 		</td>
 	</tr>
 	
-	<tr><td><label for="ldate" required>Ausleihdatum:</label></td>
+	<tr><td><label for="ldate" required style="color:white">Ausleihdatum:</label></td>
 		<td><input type="date" id="ldate"name="ldate" placeholder="yyyy-mm-dd"></td>
 	</tr>
 	<br>
-	<tr><td><label for="retdate" required>Rückgabedatum:</label></td>
+	<tr><td><label for="retdate" required style="color:white">Rückgabedatum:</label></td>
 		<td><input type="date" id="retdate"name="retdate" placeholder="yyyy-mm-dd"></td>
 	</tr>
 	<br>
-	<tr><td><input type="submit" name="Absenden" value="Absenden" class="btn btn-outline-success"></td></tr>
+	<tr><td></td><td><input type="submit" name="Absenden" value="Absenden" class="btn btn-info" onclick="clickCounter()"></td></tr>
 </table>
 </form>
 <br>
 <div style="color:red"> Bitte stellen Sie sicher, dass Sie eingeloggt sind, bevor Sie auf "Absenden" klicken.</div>
 <br>
+<a class="btn btn-info" href="../Fahrradverleih/WebContent/login.php">Login</a>
+<br>
 <div>${message}</div>
 <br>
 <jsp:useBean id="aktuelle_zeit" class="java.util.Date" />
-<div>aktuelles Datum: ${aktuelle_zeit}</div>
+<div style="color:white">aktuelles Datum: ${aktuelle_zeit}</div>
 
+</center>
 </body>
 </html>
