@@ -1,6 +1,3 @@
-<?php
-include('login_state.php');
-?>
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -30,7 +27,7 @@ include('login_state.php');
 	  $bike3 = $stmt->rowCount();
 	  
 	  
-	  $name = ['Bike 1', 'Bike 2', 'Bike 3'];	  
+	  $name = ['Mountainbike', 'Strassenrad', 'E-Bike'];	  
 	  $sumOf = [$bike1,$bike2,$bike3];
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -50,7 +47,7 @@ include('login_state.php');
 
 
             var options = {
-                title: 'Verfügbarkeit in %'
+                title: 'Aufteilung der verfügbaren Fahrräder in %'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -74,8 +71,8 @@ include('login_state.php');
 	</script>
 	<!--end of Navigation bar-->
 	
-	<div style ="text-align:center"> <h1>Sehen sie hier die aktuelle Verfügbarkeit unserer Fahrräder: </h1> </div>
-		 <div id="piechart" style="width: 900px; height: 500px;"></div>
+	<div style ="text-align:center"> <h1>Hier sehen sie die aktuelle Verfügbarkeit unserer Fahrräder: </h1> </div>
+		 <div id="piechart" style="width: 900px; height: 500px; margin: auto; border: 3px solid green; padding: 10px;"></div>
 	</diV>
 </body>
 </html>

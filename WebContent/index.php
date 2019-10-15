@@ -109,35 +109,6 @@ session_start();
        }
        </script>
        
-	
-	<div class="col-md-5 p-lg-5 mx-auto my-5" style= text-align:left>
-	<h3>Kontakt</h3>
-	<p> Geben Sie hier bitte zuerst Ihre Daten ein, damit wir Sie dann kontaktieren können </p>
-		<form>
-			<input type="radio" name="gender" value="frau" checked> Frau 
-			<input type="radio" name="gender" value="herr"> Herr <br>
-			Vorname: <br>
-			<input type=text name="vorname" value="Max">
-			<br>
-			Nachname: <br>
-			<input type="text" name="nachname" value="Mustermann">
-			<br>
-			E-Mail: <br>
-			<input type="text" name="email" value="max.mustermann@example.com">
-			<br>
-			Grund der Kontaktaufnahme: <br>
-			<select name="grund">
-				<option value="leihe"> Leihe </option>
-				<option value="beratung"> Beratung </option>
-				<option value="feedback"> Feedback </option>
-				<option value="sonstiges"> Sonstiges </option> 
-			</select>
-			<br>
-			Ihre Nachricht: <br>
-			<textarea rows="10" cols="40"> Your text </textarea>
-		</form>
-	</div>
-	
 	<footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">

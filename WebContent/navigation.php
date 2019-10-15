@@ -8,7 +8,7 @@ session_start();
         </a>
         <a class="py-2 d-none d-md-inline-block" href="https://www.mannheim.dhbw.de/startseite">DHBW</a>
         <a class="py-2 d-none d-md-inline-block" href="location.html">Wie sie uns finden</a>
-        <a class="py-2 d-none d-md-inline-block" href="contact.html">Kontakt</a>
+        <a class="py-2 d-none d-md-inline-block" href="contact.php">Kontakt</a>
         <a class="py-2 d-none d-md-inline-block" href="price.php">Preise</a>
         <a class="py-2 d-none d-md-inline-block" href="verfügbarkeit.php">Verfügbarkeitsstatus</a>
 		<?php
