@@ -6,7 +6,7 @@
 
 		// Get data from FORM
 		$email = $_POST['email'];
-		$password = crypt($_POST['password'],$email);
+		$password = $_POST['password'];
 		$remember = isset($_POST['login_remember']) ? '1' : '0';
 		
 		if(isset($_COOKIE['PHPSESSID'])) {
@@ -35,7 +35,7 @@
 					<?php
 				}
 				else {
-					if($password == $data['password']) {
+					if(password_verify($password , $data['password'] )) {
 						$_SESSION['firstname'] = $data['firstname'];
 						$_SESSION['lastname'] = $data['lastname'];
 						$_SESSION['email'] = $data['email'];

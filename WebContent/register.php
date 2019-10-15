@@ -8,7 +8,8 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
-		$password = crypt($_POST['password'],$email);
+		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+		
 
 		if($firstname == '')
 			$errMsg = 'Enter your first name';
