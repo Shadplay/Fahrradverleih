@@ -47,7 +47,7 @@
 						':email' => $email,
 						));
 						
-						setcookie("email",$email,time()+(3600*24));
+						setcookie("email",$email,time()+(3600*24),'/');
 						
 						header('Location: index.php');
 						exit;
