@@ -5,7 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+<title>Booking Status</title>
+
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <center>
@@ -19,15 +22,15 @@ function clickCounter() {
     } else {
       localStorage.clickcount = 1;
     }
-    document.getElementById("result").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank you!";
+    document.getElementById("msg").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank You!";
   } else {
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    document.getElementById("msg").innerHTML = "Sorry, your browser does not support web storage...";
   }
 }
 </script>
-	<div style="color:black" id="result"><br><br></div>
+	<div style="color:black" id="msg"><br><br></div>
 	
-<div><${message}</div>
+<div>${message}</div>
 
 </center>
 </body>

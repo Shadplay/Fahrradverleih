@@ -64,7 +64,7 @@ function clickCounter() {
 <form action="booker" method= "post">
 <center>
 <table>
-	<tr><td><label for="type" required style="color:white">Fahrradtyp:</label> </td>
+	<tr><td><label for="type" style="color:white">Fahrradtyp:</label> </td>
 		<td><select id="type" name="type">
 				<option value="1"> Mountainbike </option>
 				<option value="2"> Strassenrad </option>
@@ -73,7 +73,7 @@ function clickCounter() {
 		</td>
 	</tr>
 	
-	<tr><td><label for="amount" required style="color:white">Anzahl:</label></td>
+	<!-- <tr><td><label for="amount" style="color:white">Anzahl:</label></td>
 		<td>
 			<select id="amount" name="anzahl">
 				<option value="1"> 1 </option>
@@ -83,16 +83,18 @@ function clickCounter() {
 				<option value="5"> 5 </option>
 			</select>
 		</td>
-	</tr>
+	</tr> -->
 	
-	<tr><td><label for="ldate" required style="color:white">Ausleihdatum:</label></td>
+	<tr><td><label for="ldate" style="color:white">Ausleihdatum:</label></td>
 		<td><input type="date" id="ldate"name="ldate" placeholder="yyyy-mm-dd"></td>
 	</tr>
 	<br>
-	<tr><td><label for="retdate" required style="color:white">Rückgabedatum:</label></td>
+	
+	<!-- <tr><td><label for="retdate" style="color:white">Rückgabedatum:</label></td>
 		<td><input type="date" id="retdate"name="retdate" placeholder="yyyy-mm-dd"></td>
 	</tr>
-	<br>
+	<br> -->
+	
 	<tr><td></td><td><input type="submit" name="Absenden" value="Absenden" class="btn btn-info" onclick="clickCounter()"></td></tr>
 </table>
 </form>
@@ -103,8 +105,10 @@ function clickCounter() {
 <br>
 <div>${message}</div>
 <br>
-<jsp:useBean id="aktuelle_zeit" class="java.util.Date" />
-<div style="color:white">aktuelles Datum: ${aktuelle_zeit}</div>
+
+<jsp:useBean id="jetzt" class="booking.MyTime" />
+<div style="color:white"> aktuelles Datum: ${jetzt.date}</div>
+ 
 
 </center>
 </body>

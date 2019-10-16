@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Booking {
 	
-	String kundenID;
-	String radID;
-	java.sql.Date leihDat;
-	java.sql.Date rueckDat;
-	String rueckstatus= "k.A.";
+	private String kundenID;
+	private String radID;
+	private java.sql.Date leihDat;
+	private java.sql.Date rueckDat;
+	private String rueckstatus= "k.A.";
 	
 	
 	public String getKundenID() {

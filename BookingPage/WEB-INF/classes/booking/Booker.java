@@ -31,49 +31,50 @@ public class Booker extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ich bin beim Booker");		 
-		
+		//System.out.println("ich bin beim Booker");		 
+		Booking b= new Booking();
+		BookingMethods bm = new BookingMethods();
+			
 			try {
-				String radID = request.getParameter("type");
-				Date leihDat = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ldate"));
-//				java.sql.Date leihDat = request.getParameter("ldate"); 
-				Date rueckDat = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("retdate"));
-//				String rueckDat = request.getParameter("retdate");
-				String rueckStatus = "n.A.";
-
-				Booking b= new Booking();
-				BookingMethods bm = new BookingMethods();
-
-					b.setKundenID(bm.getUserID(request));
+				if(bm.isSessionID(request)) {
+				
+					String radID = request.getParameter("type");
+					Date leihDat = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ldate"));
+	//				Date rueckDat = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("retdate"));
+					String rueckStatus = "n.A.";				
+		
+					b.setKundenID(bm.getUserIDMail(request));
 					System.out.println(b.getKundenID());
 					b.setRadID(bm.getRadID(new java.sql.Date(leihDat.getTime()), radID)); //radID wird auf eine ID von einem nicht gebuchten Rad gesetzt
 					b.setLeihDat(new java.sql.Date(leihDat.getTime()));
-					b.setRueckDat(new java.sql.Date(rueckDat.getTime()));
+	//					b.setRueckDat(new java.sql.Date(rueckDat.getTime()));
 					b.setRueckstatus(rueckStatus);		
+						
+					int i = bm.insertBooking(b); 
+					//bm.isSessionID(request, email);
 					
-				//KundenID ist email (wurde vorher so gesetzt)
-				int i = bm.insertBooking(b); // mir nicht klar, was für ein Cookie das ist cookies[0].getValue()
-				//bm.isSessionID(request, email);
-				
-				if(b.getRueckDat()!=null && b.getLeihDat()!=null){
-					request.setAttribute("message","Das Fahrrad " + b.getRadID() + " wurde für folgendes Datum gebucht: <br>" + leihDat +" <b>bis</b> <br>" + rueckDat);
-				}else{
-					request.setAttribute("message","Stellen Sie sicher, dass Sie ein Ausleih- und Rueckgabedatum angegeben haben");
+					if(/**b.getRueckDat()!=null &&**/ b.getLeihDat()!=null){
+						request.setAttribute("message","<div> Das Fahrrad " + b.getRadID() + " wurde für folgendes Datum gebucht: " + leihDat + "</div>");
+					}else{
+						request.setAttribute("message","Stellen Sie sicher, dass Sie ein Ausleihdatum angegeben haben");
+					}
+					// Status wurde bei java.sql.SQLException auf "-2" gesetzt
+					if(i==-2) {
+						request.setAttribute("message","<div> Für das gewählte Datum ist leider <b>kein Fahrrad des gewählten Typs mehr verfügbar</b>.<br> Bitte entscheiden Sie sich für ein anderes Fahrrad, oder wählen Sie ein anderes Datum.<br> Vielen Dank! </div>");
+					}		
+					
+				} else {
+					request.setAttribute("message","<div> Bitte loggen Sie sich zuerst ein! </div><a class=\"btn btn-info\" href=\"../Fahrradverleih/WebContent/login.php\">Login</a>");
 				}
-				System.out.println("Insert");
-				
-				// Status wurde bei java.sql.SQLException auf "-2" gesetzt
-				if(i==-2) {
-					request.setAttribute("message","Für das gewählte Datum ist leider kein Fahrrad des gewählten Typs mehr verfügbar.<br> Bitte entscheiden Sie sich für ein anderes Fahrrad, oder wählen Sie ein anderes Datum.<br> Vielen Dank!");
-				}
-			} catch (java.text.ParseException e) {
-				request.setAttribute("message","Bitte Wiederholen Sie die Eingabe. Stellen Sie dabei sicher, dass Sie ein Ausleih- und Rueckgabedatum angegeben haben");				
-				System.out.println(e.toString());	
-			}catch (Exception e) {
-				request.setAttribute("message",e.toString());				
-				System.out.println(e.toString());				
-			}
-
+		} catch (java.text.ParseException e) {
+			request.setAttribute("message","<div>Bitte Wiederholen Sie die Eingabe. Stellen Sie dabei sicher, dass Sie ein Ausleihdatum angegeben haben </div>");				
+			System.out.println(e.toString());	
+		}catch (Exception e) {
+			request.setAttribute("message","<div>" + e.toString() + "</div>");				
+			System.out.println(e.toString());
+		}
+		
+		
 		request.getRequestDispatcher("success.jsp").forward(request, response);	
 		
 	}
