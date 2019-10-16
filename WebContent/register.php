@@ -1,16 +1,17 @@
 <?php
+	// Einbindung der Datenbankverbindung
 	require 'inc/db.php';
 
 	if(isset($_POST['register'])) {
 		$errMsg = '';
 
-		// Get data from FROM
+		// Daten des HTML Forms auslesen
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
 		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		
-
+		// Fehler erzeugen falls Informationen nicht eingetragen wurden
 		if($firstname == '')
 			$errMsg = 'Enter your first name';
 		if($lastname == '')
@@ -20,7 +21,7 @@
 		if($password == '')
 			$errMsg = 'Enter password';
 		
-
+		// Trage Nutzerinformationen als neuen Nutzer in die users ein
 		if($errMsg == ''){
 			try {
 				$stmt = $connect->prepare('INSERT INTO users (firstname, lastname, email, password) VALUES (:firstname,:lastname, :email, :password)');
@@ -31,6 +32,7 @@
 					':password' => $password,
 					));
 					?>
+					<!--JavaScript Alert, dass Registrierung erfolgreich war-->
 						<script>
 						alert('Registrierung erfolgreich, bitte loggen sie sich nun ein');
 						window.location = "index.php";	
@@ -45,7 +47,7 @@
 	}
 
 	if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-		$errMsg = 'Registration successfull. Now you can <a href="login.php">login</a>';
+		$errMsg = 'Registration erfolgreich.<a href="login.php">login</a>';
 	}
 ?>
 <html lang="en">
@@ -62,6 +64,7 @@
 	<link rel="stylesheet" type="text/css" href="ressources/login/main.css">
 <!--===============================================================================================-->
 
+<!--Mithilfe von Ajax und des Kennworttests wird hier die Passwortstärke überprüft und ausgegeben-->
 <script>
 function testekennwortqualitaet(inhalt)
 {
@@ -94,10 +97,11 @@ function testekennwortqualitaet(inhalt)
 
 </head>
 <body>
-		
+<!--Registrierungsformular das mit Hilfe von CSS gestaltet wurde-->
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('ressources/login/images/image.jpg');">
 			<div class="wrap-login100">
+						<!--Einbindung einer SVG Grafik-->	
 					<span class="login100-form-logo">
 						 <img width="90" src="ressources/vectorgrafik.svg">
 					</span>

@@ -8,10 +8,11 @@
     <!-- Bootstrap core CSS -->
     <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
 
-    <!-- Custom styles for this template -->
+    <!-- Anpassung der Kern CSS -->
     <link href="ressources/product.css" rel="stylesheet">
 	
-	<style>
+	<!-- Alternative zur CSS Datei, die Styles direkt in der Webseite festlegt-->
+	<style> 
 		body {font-family: Arial, Helvetica, sans-serif;}
 		* {box-sizing: border-box;}
 
@@ -65,6 +66,8 @@
 	});
 	</script>
 	<!--end of Navigation bar-->
+	
+	<!--Kontaktformular wird mit Hilfe von HTML5 Forms erstellt und die Daten über den submit Button an die Datei contactAtion.php geschickt-->
 	<div style="width: 900px; margin: auto; padding: 10px;">
 	<h2 style="text-align:center">Kontakt</h2>
 	<div style="text-align:center"> Geben Sie hier bitte zuerst Ihre Daten ein, damit wir Sie dann kontaktieren können.</div>

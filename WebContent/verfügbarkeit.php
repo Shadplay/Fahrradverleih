@@ -8,10 +8,11 @@
     <!-- Bootstrap core CSS -->
     <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
 
-    <!-- Custom styles for this template -->
+    <!-- Anpassung der Kern CSS -->
     <link href="ressources/product.css" rel="stylesheet">
 	
   </head>
+   <!-- Auslesen der aktuell nicht verliehenen Fahrräder aus der Datenbank-->
   <?php
       require 'inc/db.php';
 	  $stmt = $connect->prepare('SELECT * FROM bikes WHERE verliehen = 0 AND modellID = 1');
@@ -30,6 +31,7 @@
 	  $name = ['Mountainbike', 'Strassenrad', 'E-Bike'];	  
 	  $sumOf = [$bike1,$bike2,$bike3];
 ?>
+   <!-- Dynamisches Erstellen eines Piecharts mithilfe von PHP und Google Charts-->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});

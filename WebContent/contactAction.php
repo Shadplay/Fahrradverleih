@@ -1,7 +1,7 @@
 <?php
 require 'inc/db.php';
 
-// Get data from FROM
+// Daten vom Formular abrufen und in Variablen speichern
 $anrede = $_POST['anrede'];
 $vorname = $_POST['vorname'];
 $nachname = $_POST['nachname'];
@@ -9,6 +9,7 @@ $email = $_POST['email'];
 $grund = $_POST['grund'];
 $message = $_POST['message'];
 
+// Bei fehlenden Daten wird ein Fehler erzeugt
 		if($anrede == '')
 			$errMsg = 'error';
 		if($vorname == '')
@@ -22,6 +23,7 @@ $message = $_POST['message'];
 		if($message == '')
 			$errMsg = 'error';
 		
+// Falls kein Fehler aufgetreten ist, dann speichere die Informationen in der Datenbanktabelle "contact"		
 
 		if($errMsg == ''){
 			try {

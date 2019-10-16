@@ -1,4 +1,5 @@
 <?php
+//Überprüfung des eingegebenen Kennworts auf verschiedene Sicherheitsmerkmale
 $passwort = '';
 if ( isset($_GET['q']) )
 {
@@ -18,6 +19,7 @@ if (preg_match("/[0-9]/", $passwort)) {
 if (preg_match("/[,.-;:_]/", $passwort)) {
     $sicherheitszahl = $sicherheitszahl + 5;
 }
+//Ausgabe des Analyseergebnis 
 if ($sicherheitszahl <= 18 ) {
     echo '<span style="color:#FF0000"> Dieses Kennwort ist unsicher </span>';
 }

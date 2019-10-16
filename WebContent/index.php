@@ -12,7 +12,7 @@ session_start();
     <!-- Bootstrap core CSS -->
     <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
 
-    <!-- Custom styles for this template -->
+    <!-- Anpassung der Kern CSS -->
     <link href="ressources/product.css" rel="stylesheet">
 	
   </head>
@@ -32,7 +32,8 @@ session_start();
 	</script>
 	<!--end of Navigation bar-->
 
-    <div class="image-1 text-center bg-light">
+    <!-- Titelbild mit Text und Button -->
+	<div class="image-1 text-center bg-light">
     	<div class="col-md-5 p-lg-5 mx-auto my-5">
         <h1 class="image1-font">Läufst du noch oder fährst du schon?</h1>
         <p class="lead font-weight-normal">Top Markenfahrräder zu günstigen Preisen mieten!</p>
@@ -40,7 +41,7 @@ session_start();
       	</div>
       </div>
       
-      
+      <!-- Auswahl Fahrräder und Dropdown der Preise -->
       <br>
       <h2 style= "text-align:center"><b>Modelle</b></h2>
       <br>
@@ -91,7 +92,8 @@ session_start();
              </ul>
            </div>
        </div>
-      
+	   
+	     <!-- JavaScript zur Erfüllung des Dropdown -->
        <script type="text/javascript">
        function toggleDisplay(element,self){
            var x = document.getElementById(element);
@@ -106,6 +108,7 @@ session_start();
        }
        </script>
        
+	 <!-- Fußbereich und Ende der Webseite -->   
 	<footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">

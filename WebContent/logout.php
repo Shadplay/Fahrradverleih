@@ -1,4 +1,5 @@
 <?php
+	//Zerstöre Session und entferne den E-Mail Cookie bei Logout, sowie Weiterleitung zur Startseite
 	require 'inc/db.php';
 	session_destroy();
 	setcookie("email","",time() - 3600);
