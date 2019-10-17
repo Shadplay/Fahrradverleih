@@ -52,7 +52,7 @@
 
 
             var options = {
-                title: 'Aufteilung der verfügbaren Fahrräder in %'
+                title: 'Aufteilung der verfügbaren Fahrräder für heute in %'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));

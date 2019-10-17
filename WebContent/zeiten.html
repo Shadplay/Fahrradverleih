@@ -1,0 +1,185 @@
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico">
+	
+    <title>Fahrradverleih Mannheim</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="ressources/bootstrap.min.css" rel="stylesheet"> 
+
+    <!-- Anpassung der Kern CSS -->
+    <link href="ressources/product.css" rel="stylesheet">
+	
+	<!-- Design  -->
+    <style>
+    body {
+        font-family: helvetica;
+    }
+    h1 {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #8CC63F;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        color: #A299AC;
+    }
+    /* Highlight des aktuellen Tages */
+table {
+    border-collapse: collapse;
+}
+    #activerow {
+        border: 0.5px solid #8CC63F;
+    }
+    #activerow > td {
+        color: #8CC63F;
+        font-weight: 600;
+    }
+    #activerow > td > span {
+        color: #8CC63F;
+    }
+    /* Design der Tabelle */
+    .opening-hours {
+		margin: auto;
+		overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.24);
+        background-color: white;
+        padding: 2em;
+        max-width: 430px;
+        min-width: 300px;
+    }
+    .fvl-d > td {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 1.2px;
+        color: #A299AC;
+        text-transform: uppercase;
+        padding: 1em;
+    }
+    .fvl-d > td > span {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        color: #A299AC;
+        text-transform: uppercase;
+    }
+    @media screen and (max-width: 382px) {
+ .fvl-d > td {
+        font-size: 14px;
+        padding: 15px 5px;
+    }
+   #activerow {
+        border: none;
+        background-color: #8CC63F;
+    }
+    #activerow > td {
+        color: white;
+        font-weight: 600;
+    }
+    #activerow > td > span {
+        color: white;
+    }
+}
+    </style>
+	
+  </head>
+
+ <body>
+
+		<!--Navigation bar-->
+	<div id="nav-placeholder">
+
+	</div>
+
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script>
+	$.get("navigation.php", function(data){
+		$("#nav-placeholder").replaceWith(data);
+	});
+	</script>
+	<!--end of Navigation bar-->
+	
+	<!--Einbindung von Öffnungszeiten mit aktueller Tagesanzeige-->
+		
+    <div class="opening-hours">
+        <h1>Unsere Öffnungszeiten:</h1>
+        <p>Wir freuen uns auf ihren Besuch !</p>
+        <table>
+            <tr class="monday fvl-d">
+                <td><span>Montag</span></td>
+                <td>8.00 - 11.30</td>
+                <td>14.30 - 18.00</td>
+            </tr>
+            <tr class="tuesday fvl-d">
+                <td><span>Dienstag</span></td>
+                <td>8.00 - 11.30</td>
+                <td>14.30 - 18.00</td>
+            </tr>
+            <tr class="wednesday fvl-d">
+                <td><span>Mittwoch</span></td>
+                <td>8.00 - 12.00</td>
+            </tr>
+            <tr class="thursday fvl-d">
+                <td><span>Donnerstag</span></td>
+                <td>8.00 - 11.30</td>
+                <td>14.30 - 18.00</td>
+            </tr>
+            <tr class="friday fvl-d">
+                <td><span>Freitag</span></td>
+                <td>12.00 - 22.00</td>
+            </tr>
+            <tr class="saturday fvl-d">
+                <td><span>Samstag</span></td>
+                <td>17.00 - 22.00</td>
+            </tr>
+            <tr class="sunday fvl-d">
+                <td><span>Sonntag</span></td>
+                <td>Geschlossen</td>
+            </tr>
+        </table>
+    </div>
+    <!-- Javescript  -->
+    <script>
+    const time = () => {
+        const activerow = document.querySelector('#activerow');
+        const monday = document.querySelector('.monday');
+        const tuesday = document.querySelector('.tuesday');
+        const wednesday = document.querySelector('.wednesday');
+        const thursday = document.querySelector('.thursday');
+        const friday = document.querySelector('.friday');
+        const saturday = document.querySelector('.saturday');
+        const sunday = document.querySelector('.sunday');
+        switch (new Date().getDay()) {
+            case 1:
+                monday.setAttribute("id", "activerow");
+                break;
+            case 2:
+                tuesday.setAttribute("id", "activerow");
+                break;
+            case 3:
+                wednesday.setAttribute("id", "activerow");
+                break;
+            case 4:
+                thursday.setAttribute("id", "activerow");
+                break;
+            case 5:
+                friday.setAttribute("id", "activerow");
+                break;
+            case 6:
+                saturday.setAttribute("id", "activerow");
+                break;
+            case 0:
+                sunday.setAttribute("id", "activerow");
+                break;
+        }
+    }
+    time();
+    </script>
+	
+</body>
+</html>
