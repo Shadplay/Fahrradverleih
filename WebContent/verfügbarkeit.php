@@ -15,15 +15,18 @@
    <!-- Auslesen der aktuell nicht verliehenen Fahrräder aus der Datenbank-->
   <?php
       require 'inc/db.php';
-	  $stmt = $connect->prepare('SELECT * FROM bikes WHERE verliehen = 0 AND modellID = 1');
+	  
+	  $heute = date("Y-m-d");
+	  
+	  $stmt = $connect->prepare("SELECT bikeID FROM bikes LEFT JOIN ((SELECT radID AS r FROM loan WHERE leihDat = $heute GROUP BY r) AS datum) ON bikes.bikeID = datum.r JOIN type ON type.modellID=bikes.modellID WHERE datum.r IS NULL AND bikes.modellID=1 GROUP BY bikeID");
 	  $stmt->execute();
 	  $bike1 = $stmt->rowCount();
 	  
-	  $stmt = $connect->prepare('SELECT * FROM bikes WHERE verliehen = 0 AND modellID = 2');
+	  $stmt = $connect->prepare("SELECT bikeID FROM bikes LEFT JOIN ((SELECT radID AS r FROM loan WHERE leihDat = $heute GROUP BY r) AS datum) ON bikes.bikeID = datum.r JOIN type ON type.modellID=bikes.modellID WHERE datum.r IS NULL AND bikes.modellID=2 GROUP BY bikeID");
 	  $stmt->execute();
 	  $bike2 = $stmt->rowCount();
 	  
-	  $stmt = $connect->prepare('SELECT * FROM bikes WHERE verliehen = 0 AND modellID = 3');
+	  $stmt = $connect->prepare("SELECT bikeID FROM bikes LEFT JOIN ((SELECT radID AS r FROM loan WHERE leihDat = $heute GROUP BY r) AS datum) ON bikes.bikeID = datum.r JOIN type ON type.modellID=bikes.modellID WHERE datum.r IS NULL AND bikes.modellID=3 GROUP BY bikeID");
 	  $stmt->execute();
 	  $bike3 = $stmt->rowCount();
 	  
