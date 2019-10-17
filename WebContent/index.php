@@ -51,7 +51,7 @@ session_start();
              <ul class="list-unstyled">
                <li><img src="ressources/image.jpg" alt="Fahrrad" style="width:350px;height:250px;" </a></li>
                <br>
-               <li><a class="btn btn-outline-success" href="#">Buchen</a></li>
+               <li><a class="btn btn-outline-success" href="/BookingPage/bookingPage.jsp">Buchen</a></li>
                 <li><a id="self1" class="btn btn-link" onclick="toggleDisplay('button1', 'self1')">weitere Informationen</a></li>
                <li id="button1" style="display:none">
                    <ul class="list-unstyled">
@@ -67,7 +67,7 @@ session_start();
              <ul class="list-unstyled">
                <li><img src="ressources/image1.jpg" alt="Fahrrad" style="width:350px;height:250px;" </a></li>
                <br>
-               <li><a class="btn btn-outline-success" href="#">Buchen</a></li>
+               <li><a class="btn btn-outline-success" href="/BookingPage/bookingPage.jsp">Buchen</a></li>
                 <li><a id="self2" class="btn btn-link" onclick="toggleDisplay('button2', 'self2')">weitere Informationen</a></li>
                <li id="button2" style="display:none">
                    <ul class="list-unstyled">
@@ -82,7 +82,7 @@ session_start();
              <ul class="list-unstyled">
                <li><img src="ressources/image2.jpg" alt="Fahrrad" style="width:350px;height:250px;" </a></li>
                <br>
-               <li><a class="btn btn-outline-success" href="#">Buchen</a></li>
+               <li><a class="btn btn-outline-success" href="/BookingPage/bookingPage.jsp">Buchen</a></li>
                <li><a id="self3" class="btn btn-link" onclick="toggleDisplay('button3', 'self3')">weitere Informationen</a></li>
                <li id="button3" style="display:none">
                    <ul class="list-unstyled">
