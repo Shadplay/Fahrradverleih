@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Okt 2019 um 12:58
--- Server-Version: 10.4.6-MariaDB
--- PHP-Version: 7.3.9
+-- Erstellungszeit: 19. Okt 2019 um 19:38
+-- Server-Version: 10.4.8-MariaDB
+-- PHP-Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -71,8 +71,8 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `anrede`, `vorname`, `nachname`, `email`, `grund`, `message`) VALUES
-(1, 'Herr', 'Patrick', 'Odermann', 'patrick.odermann@mail.com', 'leihe', 'Hallo, wie lange ist die Ausleihdauer?'),
-(2, 'Herr', 'Max', 'Geis', 'm.geis@mail.com', 'Beratung', 'Wann haben sie Zeit für einen Beratungstermin?');
+(2, 'Herr', 'Max', 'Geis', 'm.geis@mail.com', 'Beratung', 'Wann haben sie Zeit für einen Beratungstermin?'),
+(3, 'Frau', 'Simone', 'Hallmeier', 'h.meier@mail.com', 'Leihe', 'Test');
 
 -- --------------------------------------------------------
 
@@ -94,12 +94,7 @@ CREATE TABLE `loan` (
 --
 
 INSERT INTO `loan` (`leihID`, `userID`, `radID`, `leihDat`, `rueckDat`, `rueckStatus`) VALUES
-(1, 1, 2, '0000-00-00', '0000-00-00', 'n.A.'),
-(2, 1, 2, '0000-00-00', '0000-00-00', 'n.A.'),
-(3, 1, 2, '0000-00-00', '0000-00-00', 'n.A.'),
-(4, 1, 2, '2000-11-17', '2000-11-19', 'n.A.'),
-(5, 1, 2, '2019-11-30', '2019-12-01', 'n.A.'),
-(7, 1, 3, '2000-12-12', '2000-12-13', 'n.A.');
+(5, 1, 2, '2019-11-30', '2019-12-01', 'n.A.');
 
 -- --------------------------------------------------------
 
@@ -141,10 +136,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `session_id`) VALUES
-(8, 'Patrick', 'Odermann', 'patrick.odermann@mail.com', 'pa4.HHSXL55NA', 'rhq1jmr8c5ierf8q2q5evd7qtc'),
-(9, 'Fabian', 'Rohrmann', 'fabian.rohrmann@mail.com', 'faXiVPE7xyD2E', 'rhq1jmr8c5ierf8q2q5evd7qtc'),
 (11, 'Patrick', 'Odermann', 'p.odermann@web.de', '$2y$10$56wga2npfB8JVHRb9kzikOA5mSmNZ8P4aAvZDkjTwwxVMKIUHc5My', '6ss2e4e0v32ifj1slqs4h3hveu'),
-(12, 'Max', 'Geis', 'm.g@mx.de', '$2y$10$3q6iJPgW/OYBcHWjOJuA/eRxLzOdqXgCNl6hRgrrVpx6KgHIFe3gy', '');
+(14, 'Brigitte', 'Maus', 'b.maus@web.de', '$2y$10$CtkEjyLbR4sximiTmc/hge9Ob61ZnnLsQrFHvuX9l8qLfvi8z/Zn2', 'mi9j06fon56vg0fk9u6sfc8e82');
 
 --
 -- Indizes der exportierten Tabellen
@@ -155,6 +148,12 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `sessio
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `loan`
+--
+ALTER TABLE `loan`
+  ADD PRIMARY KEY (`leihID`);
 
 --
 -- Indizes für die Tabelle `users`
@@ -170,13 +169,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
