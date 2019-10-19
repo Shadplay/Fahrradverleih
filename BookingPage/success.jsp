@@ -9,27 +9,25 @@
 
 <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
+    
 </head>
+
 <body>
+
 <center>
 <br><br>
+<div id="result"></div>
 
 <script>
-function clickCounter() {
-  if (typeof(Storage) !== "undefined") {
-    if (localStorage.clickcount) {
-      localStorage.clickcount = Number(localStorage.clickcount)+1;
-    } else {
-      localStorage.clickcount = 1;
-    }
-    document.getElementById("msg").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank You!";
-  } else {
-    document.getElementById("msg").innerHTML = "Sorry, your browser does not support web storage...";
-  }
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+	// get input
+  document.getElementById("result").innerHTML = "Sie haben bisher "  + localStorage.clickcount + " Buchungen versucht / aufgegeben. Vielen Dank!";
+} else {
+  document.getElementById("result").innerHTML = "Ihr Browser unterstützt leider keinen Local Web Storage.";
 }
 </script>
-	<div style="color:black" id="msg"><br><br></div>
-	
+<br><br>
 <div>${message}</div>
 
 </center>

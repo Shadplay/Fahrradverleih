@@ -32,6 +32,18 @@
 				opacity: 1.0 !important;
 		}
 	</style>
+	
+	<script>
+		function clickCounter() {
+		  if (typeof(Storage) !== "undefined") {
+		    if (localStorage.clickcount) {
+		      localStorage.clickcount = Number(localStorage.clickcount)+1;
+		    } else {
+		      localStorage.clickcount = 1;
+		    }
+		    
+		}
+	</script>
 </head>
 <body>
 
@@ -45,21 +57,7 @@
               ctx.font = "30px Arial";
               ctx.strokeText("Fahrradbuchung",10,50);
               </script>
-<script>
-function clickCounter() {
-  if (typeof(Storage) !== "undefined") {
-    if (localStorage.clickcount) {
-      localStorage.clickcount = Number(localStorage.clickcount)+1;
-    } else {
-      localStorage.clickcount = 1;
-    }
-    document.getElementById("msg").innerHTML = "You have submitted" + localStorage.clickcount + " bookings so far. Thank You!";
-  } else {
-    document.getElementById("msg").innerHTML = "Sorry, your browser does not support web storage...";
-  }
-}
-</script>
-<div id="msg"></div>
+
 
 <form action="booker" method= "post">
 <center>
@@ -106,6 +104,7 @@ function clickCounter() {
 <div>${message}</div>
 <br>
 
+<!-- Aufruf JavaBean -->
 <jsp:useBean id="jetzt" class="booking.MyTime" />
 <div style="color:white"> aktuelles Datum: ${jetzt.date}</div>
  
